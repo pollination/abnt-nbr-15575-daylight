@@ -168,6 +168,13 @@ class AbntNbr15575DaylightEntryPoint(DAG):
         source='abnt_nbr_15575/abnt_nbr_15575.json'
     )
 
+    summary_rooms = Outputs.file(
+        description='JSON file containing the illuminance level and the '
+        'illuminance at the center of the sensor grid. This is the lowest '
+        'illuminance and level across the four point-in-time simulations.',
+        source='abnt_nbr_15575/abnt_nbr_15575_rooms.json'
+    )
+
     visualization_illuminance = Outputs.file(
         source='visualization_illuminance.vsf',
         description='Visualization in VisualizationSet format.'
