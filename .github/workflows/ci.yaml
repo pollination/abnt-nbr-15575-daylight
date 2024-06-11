@@ -20,7 +20,9 @@ jobs:
         with:
           node-version: 22.2.0
       - name: install python dependencies
-        run: pip install .
+        run: |
+          pip install -r dev-requirements.txt
+          pip install .
       - name: install semantic-release
         run:
           npm install @semantic-release/exec
