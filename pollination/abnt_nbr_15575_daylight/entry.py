@@ -72,6 +72,13 @@ class AbntNbr15575DaylightEntryPoint(DAG):
         alias=rad_par_daylight_factor_input
     )
 
+    ground_level = Inputs.float(
+        description='A value to define the height of the ground level. This '
+        'will make sure that rooms below this height will not be counted as '
+        'ground level rooms',
+        default=0
+    )
+
     @task(template=AbntNbr15575DaylightPrepareFolder)
     def prepare_folder(
         self, model=model, wea=wea, grid_filter=grid_filter, north=north
@@ -125,7 +132,8 @@ class AbntNbr15575DaylightEntryPoint(DAG):
         needs=[prepare_folder, illuminance_simulation]
     )
     def abnt_nbr_15575_postprocess(
-        self, folder=prepare_folder._outputs.simulation, model=model
+        self, folder=prepare_folder._outputs.simulation, model=model,
+        ground_level=ground_level
     ):
         return [
             {
@@ -162,17 +170,10 @@ class AbntNbr15575DaylightEntryPoint(DAG):
         description='Folder with the ABNT NBR 15575 post-processing.'
     )
 
-    summary = Outputs.file(
-        description='JSON file containing the illuminance criteria level and '
-        'the illuminance at the center of the sensor grid.',
-        source='abnt_nbr_15575/abnt_nbr_15575.json'
-    )
-
-    summary_rooms = Outputs.file(
-        description='JSON file containing the illuminance level and the '
-        'illuminance at the center of the sensor grid. This is the lowest '
-        'illuminance and level across the four point-in-time simulations.',
-        source='abnt_nbr_15575/abnt_nbr_15575_rooms.json'
+    abnt_nbr_15575_summary = Outputs.file(
+        description='CSV file containing the illuminance level and the '
+        'illuminance at the center of the sensor grid.',
+        source='abnt_nbr_15575/abnt_nbr_15575_rooms.csv'
     )
 
     visualization_illuminance = Outputs.file(
