@@ -3,6 +3,7 @@ from pollination_dsl.dag import Inputs, GroupedDAG, task, Outputs
 from pollination.honeybee_display.translate import ModelToVis
 from pollination.path.copy import CopyFolder
 from pollination.honeybee_radiance.post_process import AbntNbr15575DaylightVisMetadata
+from pollination.honeybee_display.abnt import AbntNbr15575DaylightVis
 
 
 @dataclass
@@ -39,6 +40,11 @@ class AbntNbr15575DaylightVisualization(GroupedDAG):
         description='Illuminance results for October 23rd 3:30 PM',
         path='visualization/illuminance_levels'
     )
+
+    center_points = Inputs.file(
+        description='A JSON file with 3D points to be visualized. These will be '
+        'displayed as DisplayPoint3D.',
+        path='center_points.json')
 
     @task(template=CopyFolder)
     def copy_illuminance_4_930am(self, src=illuminance_4_930am):
@@ -86,14 +92,15 @@ class AbntNbr15575DaylightVisualization(GroupedDAG):
         ]
 
     @task(
-        template=ModelToVis,
+        template=AbntNbr15575DaylightVis,
         needs=[copy_illuminance_4_930am, copy_illuminance_4_330pm,
                copy_illuminance_10_930am, copy_illuminance_10_330pm,
                create_vis_metadata]
     )
     def create_vsf_illuminance(
         self, model=model, grid_data='visualization',
-        active_grid_data='4_930AM', output_format='vsf'
+        active_grid_data='4_930AM', center_points=center_points,
+        output_format='vsf'
     ):
         return [
             {
@@ -102,10 +109,11 @@ class AbntNbr15575DaylightVisualization(GroupedDAG):
             }
         ]
 
-    @task(template=ModelToVis)
+    @task(template=AbntNbr15575DaylightVis)
     def create_vsf_illuminance_levels(
         self, model=model, grid_data=illuminance_levels,
-        active_grid_data='4_930AM', output_format='vsf'
+        active_grid_data='4_930AM', center_points=center_points,
+        output_format='vsf'
     ):
         return [
             {

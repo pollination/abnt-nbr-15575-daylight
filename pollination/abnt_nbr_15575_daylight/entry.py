@@ -145,14 +145,18 @@ class AbntNbr15575DaylightEntryPoint(DAG):
     @task(
         template=AbntNbr15575DaylightVisualization,
         needs=[prepare_folder, illuminance_simulation, abnt_nbr_15575_postprocess],
-        sub_paths={'illuminance_levels': 'illuminance_levels'}
+        sub_paths={
+            'illuminance_levels': 'illuminance_levels',
+            'center_points': 'center_points.json'
+        }
     )
     def create_visualization(
         self, model=model, illuminance_4_930am='simulation/4_930AM/results',
         illuminance_4_330pm='simulation/4_330PM/results',
         illuminance_10_930am='simulation/10_930AM/results',
         illuminance_10_330pm='simulation/10_330PM/results',
-        illuminance_levels=abnt_nbr_15575_postprocess._outputs.abnt_nbr_15575
+        illuminance_levels=abnt_nbr_15575_postprocess._outputs.abnt_nbr_15575,
+        center_points=abnt_nbr_15575_postprocess._outputs.abnt_nbr_15575
     ):
         return [
             {
@@ -164,6 +168,7 @@ class AbntNbr15575DaylightEntryPoint(DAG):
                 'to': 'visualization_illuminance_levels.vsf'
             }
         ]
+
 
     abnt_nbr_15575 = Outputs.folder(
         source='abnt_nbr_15575',
