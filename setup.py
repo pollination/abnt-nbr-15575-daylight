@@ -20,7 +20,7 @@ setuptools.setup(
     setup_requires=['setuptools_scm'],
     url='https://github.com/pollination/abnt-nbr-15575-daylight',                   # will be translated to home
     project_urls={
-        'icon': 'https://raw.githubusercontent.com/ladybug-tools/artwork/master/icons_components/honeybee/png/gridrecipe.png',
+        'icon': 'https://raw.githubusercontent.com/ladybug-tools/artwork/master/icons_components/honeybee/png/abntdaylight.png',
         'docker': 'https://hub.docker.com/r/ladybugtools/honeybee-radiance'
     },
     description='Evaluate ABNT NBR 15575 using point-in-time illuminance.',                  # will be used as package description
