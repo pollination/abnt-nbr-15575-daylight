@@ -17,7 +17,7 @@ api_key = os.environ['QB_POLLINATION_TOKEN']
 recipe_tag = os.environ['TAG']
 host = os.environ['HOST']
 
-owner = 'ladybug-tools'
+owner = 'pollination'
 project = 'abnt-nbr-15575-daylight'
 recipe_name = 'abnt-nbr-15575-daylight'
 
