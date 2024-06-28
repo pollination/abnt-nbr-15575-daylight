@@ -94,7 +94,7 @@ jobs:
           echo "::set-output name=tag::$TAG"
       - name: install python dependencies
         run: |
-          pip install .
+          pip install pollination-abnt-nbr-15575-daylight
           pip install -r requirements.txt
       - name: deploy to production
         run: |
