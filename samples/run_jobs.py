@@ -23,7 +23,7 @@ recipe_name = 'abnt-nbr-15575-daylight'
 
 api_client = ApiClient(host, api_key)
 recipe = Recipe(owner, recipe_name, recipe_tag, client=api_client)
-recipe.add_to_project(f'{owner}/{project}')
+recipe.add_to_project(f'ladybug-tools/{project}')
 
 # load recipe inputs for each sample run
 samples_path = Path(__file__).parent.resolve().joinpath('sample_runs.json')
