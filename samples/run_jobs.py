@@ -17,10 +17,10 @@ api_key = os.environ['QB_POLLINATION_TOKEN']
 recipe_tag = os.environ['TAG']
 host = os.environ['HOST']
 
-project_owner = 'ladybug-tools'
-project = 'abnt-nbr-15575-daylight'
 recipe_owner = 'pollination'
 recipe_name = 'abnt-nbr-15575-daylight'
+project_owner = 'ladybug-tools'
+project = 'abnt-nbr-15575-daylight'
 
 api_client = ApiClient(host, api_key)
 recipe = Recipe(recipe_owner, recipe_name, recipe_tag, client=api_client)
