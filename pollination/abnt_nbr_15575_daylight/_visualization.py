@@ -104,7 +104,7 @@ class AbntNbr15575DaylightVisualization(GroupedDAG):
     ):
         return [
             {
-                'from': ModelToVis()._outputs.output_file,
+                'from': AbntNbr15575DaylightVis()._outputs.output_file,
                 'to': 'visualization_illuminance.vsf'
             }
         ]
@@ -117,7 +117,7 @@ class AbntNbr15575DaylightVisualization(GroupedDAG):
     ):
         return [
             {
-                'from': ModelToVis()._outputs.output_file,
+                'from': AbntNbr15575DaylightVis()._outputs.output_file,
                 'to': 'visualization_illuminance_levels.vsf'
             }
         ]
