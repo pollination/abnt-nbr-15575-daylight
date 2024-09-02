@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from pollination_dsl.dag import Inputs, GroupedDAG, task, Outputs
-from pollination.honeybee_display.translate import ModelToVis
 from pollination.path.copy import CopyFolder
 from pollination.honeybee_radiance.post_process import AbntNbr15575DaylightVisMetadata
 from pollination.honeybee_display.abnt import AbntNbr15575DaylightVis
